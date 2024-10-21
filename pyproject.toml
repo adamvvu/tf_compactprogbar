@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tf_compactprogbar"
+description = "A simple and compact one-line progress bar for TensorFlow 2 Keras."
+keywords = ["tensorflow", "progress bar", "callbacks", "deep learning"]
+authors = [
+    {name = "Adam Wu"},
+    {email = "adamwu1@outlook.com"}
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"
+dependencies = [
+    "tensorflow",
+    "tqdm",
+    "ipywidgets"
+]
+classifiers = [
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Scientific/Engineering :: Information Analysis',
+    'Programming Language :: Python',
+    'Operating System :: OS Independent',
+    'License :: OSI Approved :: MIT License'
+]
+dynamic = [ "version" ]
+
+[tool.setuptools]
+packages = ["tf_compactprogbar"]
+
+[tool.setuptools.dynamic]
+version = {attr = "tf_compactprogbar.__version__"}
+
+[project.urls]
+homepage = "https://github.com/adamvvu/tf_compactprogbar"
+documentation = "https://github.com/adamvvu/tf_compactprog_bar"
+repository = "https://github.com/adamvvu/tf_compactprogbar"
