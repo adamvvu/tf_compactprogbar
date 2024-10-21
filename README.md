@@ -1,4 +1,4 @@
-[![Build](https://img.shields.io/github/actions/workflow/status/adamvvu/tf_compactprogbar/build.yml?style=for-the-badge)](https://github.com/adamvvu/tf_compactprogbar/actions/workflows/build.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/adamvvu/tf_compactprogbar/tf_compactprogbar_tests.yml?style=for-the-badge)](https://github.com/adamvvu/tf_compactprogbar/actions/workflows/tf_compactprogbar_tests.yml)
 [![PyPi](https://img.shields.io/pypi/v/tf_compactprogbar?style=for-the-badge)](https://pypi.org/project/tf-compactprogbar/)
 [![Downloads](https://img.shields.io/pypi/dm/tf_compactprogbar?style=for-the-badge)](https://pypi.org/project/tf-compactprogbar/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](https://github.com/adamvvu/tf_compactprogbar/blob/master/LICENSE)
