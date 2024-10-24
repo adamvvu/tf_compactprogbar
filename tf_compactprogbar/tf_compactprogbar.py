@@ -67,8 +67,8 @@ class CompactProgressBar(Callback):
 
         # Excluded metrics
         for metric in self.exclude:
-            metrics.pop(metric)
-            metrics.pop(f'val_{metric}')
+            metrics.pop(metric, None)
+            metrics.pop(f'val_{metric}', None)
 
         # Compute best metrics
         if self.show_best:
