@@ -10,7 +10,7 @@ class CompactProgressBar(Callback):
         - best_as_max  (list)      Metrics which should be maximized (see note)
         - exclude      (list)      Metrics which should be excluded from display
         - notebook     (str/bool)  Whether to use IPython/Jupyter widget or console. Default: 'auto'
-        - epochs       (int)       Optional total number of epochs. Default is inferred from `.fit`.
+        - epochs       (int)       Optional total number of epochs. Default: Inferred from `.fit`.
         
     Note: When using `show_best`, by default the "best" metric is the minimum. Pass
     in the metric name to `best_as_max` to change this behavior.
@@ -60,10 +60,8 @@ class CompactProgressBar(Callback):
         """
         Updates the progress bar
         """
-        self.progBar.update(1)
-
         # Current metrics
-        metrics = logs
+        metrics = logs.copy()
 
         # Excluded metrics
         for metric in self.exclude:
@@ -75,24 +73,32 @@ class CompactProgressBar(Callback):
             for metric, val in metrics.items():
                 
                 # Check mode
-                toMax = False
-                if metric in self.best_as_max:
-                    toMax = True
-                else:
-                    match = re.search(r'val_(.*)', metric)
-                    if match:
-                        toMax = True
-                        metric = match.group(1)
+                toMax = self._should_maximize(metric)
 
-                # Update
+                # Update best metric
                 x = f'best_{metric}'
                 if toMax:
-                    if val > self.bestMetrics.get(x, -999):
+                    if val > self.bestMetrics.get(x, -float('inf')):
                         self.bestMetrics[x] = val
                 else:
-                    if val < self.bestMetrics.get(x, 999):
+                    if val < self.bestMetrics.get(x, float('inf')):
                         self.bestMetrics[x] = val
             metrics.update(self.bestMetrics)
 
-        # Display metrics
-        self.progBar.set_postfix(metrics)
+        # Update progress bar
+        self.progBar.set_postfix(metrics, refresh=False)
+        self.progBar.update(1)
+
+    def _should_maximize(self, metric):
+        """
+        Check whether to display the "best" metric as max or min
+        """
+        # Check validation metric
+        isValMetric = re.search(r'val_(.*)', metric)
+        if isValMetric:
+            metric = isValMetric.group(1)
+
+        if metric in self.best_as_max:
+            return True
+        return False
+            
